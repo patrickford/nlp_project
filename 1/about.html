@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>About | Node.js</title>
+
+  <link rel="dns-prefetch" href="http://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="http://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="http://www.google-analytics.com">
+
+  <meta name="author" content="Node.js Foundation">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <link rel="icon" sizes="32x32" type="image/png" href="images/favicon.png">
+
+  <link rel="canonical" href="https://nodejs.org/en/about/">
+  <link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml">
+  <link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml">
+  <link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml">
+  <link rel="alternate" href="/en/feed/tsc-minutes.xml" title="Node.js TSC meeting minutes" type="application/rss+xml">
+  <link rel="stylesheet" href="css/styles.css" media="all">
+  <link rel="stylesheet" href="css/css.css">
+  <script>
+  document.querySelector('html').className += " has-js";
+    </script>
+  </head>
+
+<body>
+  <header>
+    <div class="container">
+  
+      <a href="/en" id="logo">
+        <img src="fonts/logo.svg" alt="node.js">
+      </a>
+  
+      <nav>
+        <ul class="list-divider-pipe">
+          <li>
+            <a href="/en/">Home</a>
+          </li>
+  
+            <li class="active">
+              <a href="/en/about/">About</a>
+            </li>
+            <li>
+              <a href="/en/download/">Downloads</a>
+            </li>
+            <li>
+              <a href="/en/docs/">Docs</a>
+            </li>
+            <li>
+              <a href="/en/foundation/">Foundation</a>
+            </li>
+            <li>
+              <a href="/en/get-involved/">Get Involved</a>
+            </li>
+            <li>
+              <a href="/en/security/">Security</a>
+            </li>
+            <li>
+              <a href="/en/blog/">News</a>
+            </li>
+        </ul>
+      </nav>
+  
+    </div>
+  </header>
+
+  <div id="main">
+    <div class="container has-side-nav">
+
+      <aside>
+        <ul>
+                <li class="active">
+                      <a href="/en/about/">About</a>
+                </li>
+                <li>
+                      <a href="/en/about/governance/">Governance</a>
+                </li>
+                <li>
+                      <a href="/en/about/working-groups/">Working Groups</a>
+                </li>
+                <li>
+                      <a href="/en/about/releases/">Releases</a>
+                </li>
+                <li>
+                      <a href="/en/about/resources/">Resources</a>
+                </li>
+                <li>
+                      <a href="/en/about/trademark/">Trademark</a>
+                </li>
+                <li>
+                      <a href="/en/about/privacy/">Privacy Policy</a>
+                </li>
+        </ul>
+      </aside>
+
+      <article>
+        <h1 id="header-about-node-js-reg">About Node.js&#xAE;<a name="about-node-js-reg" class="anchor" href="#about-node-js-reg" aria-labelledby="header-about-node-js-reg"></a></h1><p>As an asynchronous event driven JavaScript runtime, Node is designed to build
+scalable network applications. In the following &quot;hello world&quot; example, many
+connections can be handled concurrently. Upon each connection the callback is
+fired, but if there is no work to be done Node is sleeping.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;http&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> hostname <span class="token operator">=</span> <span class="token string">&apos;127.0.0.1&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> port <span class="token operator">=</span> <span class="token number">3000</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> server <span class="token operator">=</span> http<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span> res<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  res<span class="token punctuation">.</span>statusCode <span class="token operator">=</span> <span class="token number">200</span><span class="token punctuation">;</span>
+  res<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">&apos;Content-Type&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;text/plain&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token string">&apos;Hello World\n&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span>port<span class="token punctuation">,</span> hostname<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`Server running at http://</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>hostname<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>port<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>This is in contrast to today&apos;s more common concurrency model where OS threads
+are employed. Thread-based networking is relatively inefficient and very
+difficult to use. Furthermore, users of Node are free from worries of
+dead-locking the process, since there are no locks. Almost no function in Node
+directly performs I/O, so the process never blocks. Because nothing blocks,
+scalable systems are very reasonable to develop in Node.</p>
+<p>If some of this language is unfamiliar, there is a full article on
+<a href="https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/">Blocking vs Non-Blocking</a>.</p>
+<hr>
+<p>Node is similar in design to, and influenced by, systems like Ruby&apos;s
+<a href="http://rubyeventmachine.com/">Event Machine</a> or Python&apos;s <a href="http://twistedmatrix.com/">Twisted</a>. Node takes the event model a bit
+further. It presents an <a href="https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/">event loop</a> as a runtime construct instead of as a library. In other systems there is always a blocking call to start the
+event-loop.
+Typically behavior is defined through callbacks at the beginning of a script
+and at the end starts a server through a blocking call like
+<code>EventMachine::run()</code>. In Node there is no such start-the-event-loop call. Node
+simply enters the event loop after executing the input script. Node exits the
+event loop when there are no more callbacks to perform. This behavior is like
+browser JavaScript &#x2014; the event loop is hidden from the user.</p>
+<p>HTTP is a first class citizen in Node, designed with streaming and low latency
+in mind. This makes Node well suited for the foundation of a web library or
+framework.</p>
+<p>Just because Node is designed without threads, doesn&apos;t mean you cannot take
+advantage of multiple cores in your environment. Child processes can be spawned
+by using our <a href="https://nodejs.org/api/child_process.html#child_process_child_process_fork_modulepath_args_options"><code>child_process.fork()</code></a> API, and are designed to be easy to
+communicate with. Built upon that same interface is the <a href="https://nodejs.org/api/cluster.html"><code>cluster</code></a> module,
+which allows you to share sockets between processes to enable load balancing
+over your cores.</p>
+
+      </article>
+
+    </div>
+  </div>
+
+  <a href="#" id="scroll-to-top">&uarr; <span>Scroll to top</span></a>
+  
+  <footer role="contentinfo">
+  
+    <div class="container">
+      <div class="linuxfoundation-footer">
+        <div class="issue-link-container">
+          <a class="linuxfoundation-logo" href="http://collabprojects.linuxfoundation.org">
+            <img alt="Linux Foundation Collaborative Projects" src="images/lfcp.png">
+          </a>
+          <ul class="list-divider-pipe issue-link">
+            <li><a href="https://github.com/nodejs/node/issues">Report Node.js issue</a></li>
+            <li><a href="https://github.com/nodejs/nodejs.org/issues">Report website issue</a></li>
+            <li><a href="https://github.com/nodejs/help/issues">Get Help</a></li>
+          </ul>
+        </div>
+  
+        <p>© 2017 Node.js Foundation. All Rights Reserved. Portions of this site originally © 2017 Joyent. </p>
+        <p>Node.js is a trademark of Joyent, Inc. and is used with its permission. Please review the <a href="/static/documents/trademark-policy.pdf">Trademark Guidelines of the Node.js Foundation</a>.</p>
+        <p>Linux Foundation is a registered trademark of The Linux Foundation.</p>
+        <p>Linux is a registered <a href="http://www.linuxfoundation.org/programs/legal/trademark" title="Linux Mark Institute">trademark</a> of Linus Torvalds.</p>
+        <p>
+          <a href="https://raw.githubusercontent.com/nodejs/node/master/LICENSE">Node.js Project Licensing Information</a>.
+        </p>
+      </div>
+    </div>
+  
+  </footer>
+  
+  <link rel="stylesheet" href="css/prism-tomorrow.css" media="all">
+  <script type="text/javascript">
+    var $scrollToTop = document.getElementById('scroll-to-top');
+    (window.onscroll = function() {
+      $scrollToTop.style.display = (window.pageYOffset > window.innerHeight) ? 'block' : 'none';
+    })();
+    $scrollToTop.onclick = function() {
+      window.scrollTo(0, 0);
+      return false;
+    };
+  </script>
+  
+  <script>
+    (function(d,e,m,s){
+      if (!/(MSIE|Trident)/.test(navigator.userAgent)){return;}
+      m=d.createElement(e);
+      s=d.getElementsByTagName(e)[0];m.async=1;m.src='/static/js/modernizr.custom.js';
+      m.onload=function(){Modernizr.addTest('flexboxtweener', Modernizr.testAllProps('flexAlign'));};
+      s.parentNode.insertBefore(m,s);
+    })(document,'script');
+  </script>
+  
+  <script src="js/dnt_helper.js"></script>
+  <script>
+    (function(){
+      if (!_dntEnabled()) {
+        !function(n,o,d,e,j,s){n.GoogleAnalyticsObject=d;n[d]||(n[d]=function(){
+        (n[d].q=n[d].q||[]).push(arguments)});n[d].l=+new Date;j=o.createElement(e);
+        s=o.getElementsByTagName(e)[0];j.async=1;j.src='//www.google-analytics.com/analytics.js';
+        s.parentNode.insertBefore(j,s)}(window,document,'ga','script');
+  
+        if (!ga) return;
+  
+        ga('create', 'UA-67020396-1', 'auto');
+        ga('send', 'pageview');
+  
+        document.documentElement.addEventListener('click', function(e) {
+  
+          // Track case studies
+          if(!e.target || !e.target.dataset || !e.target.dataset.casestudy) return;
+          ga('send', 'event', {
+            eventCategory: 'casestudy',
+            eventAction: 'click',
+            eventLabel: e.target.dataset.casestudy,
+            eventValue: 0
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "name": "nlp",
+  "version": "0.0.1",
+  "description": "Shopping list app to demo 'the modern classic'",
+  "main": "server.js",
+  "scripts": {
+      "test": "mocha",
+      "start": "node server.js"
+    },
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.15.2",
+    "express": "^4.12.4",
+    "express-session": "^1.15.2",
+    "flash": "^1.1.0",
+    "mongoose": "^4.7.1",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-http": "^0.3.0",
+    "passport-local": "^1.0.0",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0",
+    "session": "^0.1.0",
+    "uuid": "^2.0.3",
+    "wordnet": "^0.1.2"
+  },
+  "keywords": [
+    "node",
+    "hyperdev",
+    "express"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.2.0"
+  },
+  "author": "Yuri Yerastov"
+}

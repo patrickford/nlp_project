@@ -1,0 +1,32 @@
+* {
+  font-family: helvetica;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+}
+
+
+#formbox {
+  width: 100%;
+}
+
+form {
+  background-color: #00FFFF;
+  vertical-align: middle;
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 50%;
+  margin-bottom: 50%;
+  padding: 20px;
+}
+
+
+
+
+
+.app {
+  text-align: center;
+}

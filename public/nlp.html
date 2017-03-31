@@ -1,0 +1,60 @@
+
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" type="text/css" href="style_nlp.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>NLP app</title>
+</head>
+<header>
+  <div class='app'>
+    <p class="title">
+
+    </p>
+    <p class="subtext">
+    </p>
+</div>
+</header>
+<body>
+
+
+  <div id="formbox">
+    <form action="/login" method="POST">
+        <div>
+            <label>URL:</label>
+            <input id="link" type="text" name="URL" placeholder="enter a URL to analyze" value="http://www.bbc.com/news/uk-politics-39422353"/>
+            <input id="clientData" type="submit" value="Analyze"/>
+        </div>
+    </form>
+  </div>
+
+  <div>
+    <div class="buttons">
+      <a  onclick="showElement(tagged)" href="#" hidden>Tagged words</a>
+      <a  onclick="showElement(bigrams)" href="#" hidden>Bigrams</a>
+      <a  onclick="showElement(trigrams)" href="#" hidden>Trigrams</a>
+      <a  onclick="showElement(sentiment)" href="#" hidden>Sentiment analysis</a>
+    </div>
+
+    <div class="output">
+      <div id="tagged">
+      </div>
+      <div id="bigrams">
+      </div>
+      <div id="trigrams">
+      </div>
+      <div id="sentiment">
+      </div>
+    </div>
+  </div>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="./client.js"></script>
+</html>

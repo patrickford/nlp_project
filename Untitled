@@ -1,0 +1,29 @@
+
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>NLP app</title>
+</head>
+<header>
+  <div class='app'>
+    <p class="title">
+
+    </p>
+    <p class="subtext">
+    </p>
+</div>
+</header>
+<body>
+
+Test
+
+</body>
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="./client.js"></script>
+</html>
