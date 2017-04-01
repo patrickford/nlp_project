@@ -1,3 +1,11 @@
+function deconstruct(obj) {
+  var temp = []
+  for (item in obj) {
+    temp.push(obj[item])
+  }
+  return temp
+}
+
 function putData(userUID) {
   var settings = {
     url: `/blogs/${userUID}`,
@@ -74,6 +82,7 @@ function postData(url) {
       trigramArray.sort(function(a, b) {
           return b[3] - a[3]
       })
+
     },
     error: function badData(err) {
       console.log(err);
@@ -98,8 +107,14 @@ function postData(url) {
     }
 
       $.ajax(settings).done(function(res) {
+
+        var tagged = res.tagged;
+        var taggedArray = deconstruct(tagged)
+        taggedArray.sort(function(a,b) {
+          return b[2] - a[2];
+        })
         $(".buttons").children().show()
-        writeOutput(res.tagged, "#tagged")
+        writeOutput(taggedArray, "#tagged")
         writeOutput(res.bigrams, "#bigrams")
         writeOutput(res.trigrams, "#trigrams")
         writeOutput(res.trigrams, "#sentiment")
@@ -109,7 +124,6 @@ function postData(url) {
 function showElement(element) {
   $(".output").children().hide()
   $(element).show()
-
 }
 
 $('#clientData').on('click', function(e){

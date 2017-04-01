@@ -4,17 +4,14 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const sentiment = require('sentiment');
 const natural = require('natural');
-const stemmer = natural.PorterStemmer;
-const Lemmer = require('lemmer');
+//const stemmer = natural.PorterStemmer;
+//const Lemmer = require('lemmer');
 const tokenizer = new natural.WordTokenizer;
-const wordnet = new natural.WordNet();
-const pos = require('pos');
-const tagger = new pos.Tagger();
+//const wordnet = new natural.WordNet();
 const {DATABASE_URL, PORT} = require('./config');
 const {userData, User} = require('./models');
 const app = express();
 const passport = require('passport');
-// const {BasicStrategy} = require('passport-http');
 const jsonParser = bodyParser.json();
 var request = require('request');
 var request = request.defaults({jar: true});
@@ -124,38 +121,27 @@ app.post('/user', (req, res) => {
   if (!req.body) {
     return res.status(400).json({message: 'No request body'});
   }
-
   if (!('username' in req.body)) {
     return res.status(422).json({message: 'Missing field: username'});
   }
-
   let {username, password, firstName, lastName} = req.body;
-
   if (typeof username !== 'string') {
     return res.status(422).json({message: 'Incorrect field type: username'});
   }
-
   username = username.trim();
-
   if (username === '') {
     return res.status(422).json({message: 'Incorrect field length: username'});
   }
-
   if (!(password)) {
     return res.status(422).json({message: 'Missing field: password'});
   }
-
   if (typeof password !== 'string') {
     return res.status(422).json({message: 'Incorrect field type: password'});
   }
-
   password = password.trim();
-
   if (password === '') {
     return res.status(422).json({message: 'Incorrect field length: password'});
   }
-
-  // check for existing user
   return User
     .find({username})
     .count()
@@ -185,7 +171,6 @@ app.post('/user', (req, res) => {
     });
 });
 
-
 app.post('/posts', jsonParser, (req, res) => {
   if (req.user) {
     console.log("User is already authenticated")
@@ -205,7 +190,6 @@ app.post('/posts', jsonParser, (req, res) => {
   return request(url, function (error, response, body) {
     console.log('error:', error);
     console.log('statusCode:', response && response.statusCode);
-    //console.log('body:', body);
     var matches = body.match(/<\w.*>.*<.p>/g);
     for (var i=0; i<matches.length; i++ ) {
       var cleaned = matches[i].replace(/<[^</]>/g, '');
@@ -217,22 +201,21 @@ app.post('/posts', jsonParser, (req, res) => {
   var tokenizer = new natural.WordTokenizer();
   var tokens = tokenizer.tokenize(target);
   var taggedWords = tagger.tag(tokens);
-  responseObject['tagged'] = taggedWords;
+  var taggedWordsFreq = countNgrams(taggedWords, 2)
+  //var wordsFiltered = filterObject(taggedWordsFreq, 2)
+  console.log(taggedWordsFreq);
+  responseObject['tagged'] = taggedWordsFreq;
   var NGrams = natural.NGrams;
   var bigrams = NGrams.ngrams(tokens, 2);
   var bigramsFreq = countNgrams(bigrams, 2);
   var bigramsFiltered = filterObject(bigramsFreq, 2);
-  var sortedBigrams = sortArray(bigramsFiltered);
-  //console.log(sortedBigrams)
   responseObject['bigrams'] = bigramsFiltered;
   var trigrams = NGrams.ngrams(tokens, 3);
-
   var trigramsFreq = countNgrams(trigrams, 3);
   var trigramsFiltered = filterObject(trigramsFreq, 3);
   responseObject['trigrams'] = trigramsFiltered;
   var sentimentAnalysis = sentiment(target);
   responseObject['sentiment'] = sentimentAnalysis;
-  //console.log(responseObject);
   userData
     .create({
       text: responseObject,
@@ -243,10 +226,8 @@ app.post('/posts', jsonParser, (req, res) => {
         console.error(err);
         res.status(500).json({error: 'Something went wrong'});
     });
-
   });
 });
-
 
 app.delete('/posts/:id', (req, res) => {
   userData
@@ -260,7 +241,6 @@ app.delete('/posts/:id', (req, res) => {
       res.status(500).json({error: 'something went terribly wrong'});
     });
 });
-
 
 app.put('/posts/:id', (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
@@ -286,7 +266,6 @@ app.put('/posts/:id', (req, res) => {
 app.use('*', function(req, res) {
   res.status(404).json({message: 'Not Found'});
 });
-
 
 let server;
 
