@@ -2,7 +2,7 @@ import urllib
 import requests
 
 
-r2 = requests.post('http://localhost:8080/user/', json={
+r2 = requests.post('https://murmuring-ridge-56754.herokuapp.com/user', json={
     "username" : "yuriyerastov",
     "password" : "password%@#@",
     "firstName" : "Yuri",
