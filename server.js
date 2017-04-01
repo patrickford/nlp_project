@@ -4,10 +4,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const sentiment = require('sentiment');
 const natural = require('natural');
-//const stemmer = natural.PorterStemmer;
-//const Lemmer = require('lemmer');
 const tokenizer = new natural.WordTokenizer;
-//const wordnet = new natural.WordNet();
 const pos = require('pos');
 const tagger = new pos.Tagger();
 const {DATABASE_URL, PORT} = require('./config');
@@ -22,23 +19,18 @@ app.use(express.static('./public'));
 app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-//app.use(expressSession);
 mongoose.Promise = global.Promise;
-var _username;
 app.use(expressSession({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
-
 passport.serializeUser(function(user, done) {
   done(null, user._id);
 });
-
 passport.deserializeUser(function(id, done) {
   User.findById(id, function(err, user) {
     done(err, user);
   });
 });
-
 var LocalStrategy = require('passport-local').Strategy;
 const localStrategy = new LocalStrategy((username, password, callback) => {
   let user;
@@ -61,7 +53,6 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
       }
     });
 });
-
 passport.use(localStrategy);
 
 app.post('/login',

@@ -106,8 +106,25 @@ function postData(url) {
       $(element).html(html)
     }
 
-      $.ajax(settings).done(function(res) {
+    function writeSentiment(object){
+      var compScore = object.comparative
+      var posWords = object.positive
+      var negWords = object.negative
+      console.log(object.negative)
+      var html = ''
+      html = `<p>Sentiment comparative score: ${compScore}.<p>`
+      $("#score").html(html)
 
+      $("#positive").html("<p class='block'>Positive Words</p>")
+      html = ''
+      for (var i=0; i<posWords.length; i++) {
+        html = html + posWords[i] + '<br>'
+      }
+      $("#positive").html(html)
+      //html++ "Negative Words"
+    }
+
+      $.ajax(settings).done(function(res) {
         var tagged = res.tagged;
         var taggedArray = deconstruct(tagged)
         taggedArray.sort(function(a,b) {
@@ -117,7 +134,7 @@ function postData(url) {
         writeOutput(taggedArray, "#tagged")
         writeOutput(res.bigrams, "#bigrams")
         writeOutput(res.trigrams, "#trigrams")
-        writeOutput(res.trigrams, "#sentiment")
+        writeSentiment(res.sentiment)
       });
 }
 
