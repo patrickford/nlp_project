@@ -7,26 +7,56 @@ body {
   width: 100%;
 }
 
+.formbox {
+  margin-top: 25%;
+  background-color:
+}
 
-#formbox {
-  width: 100%;
+.innerbox {
+  margin: 0 auto;
 }
 
 form {
-  background-color: #00FFFF;
+  background-color: #F5F5F5;
+  font-size: 10px;
   vertical-align: middle;
-  width: 50%;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 50%;
+  margin: 0 auto;
+  width: 35%;
   margin-bottom: 50%;
-  padding: 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  border-radius: 5px;
+  border-style: groove;
 }
 
-
-
-
+.entry {
+  padding-bottom: 10px;
+}
 
 .app {
   text-align: center;
+}
+
+.account {
+  text-align: right;
+}
+
+.account a {
+  text-decoration: none;
+  color: #0080ff;
+}
+
+.field {
+  height: 30px;
+  width: 100%;
+  vertical-align: middle;
+}
+
+#sub {
+    background-color: #0080ff;
+    border-style: none;
+    border-radius: 5px;
+    color: #ffffff;
 }

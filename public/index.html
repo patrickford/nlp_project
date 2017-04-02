@@ -9,7 +9,7 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Blog</title>
+  <title>Language Analyzer</title>
 </head>
 <header>
   <div class='app'>
@@ -21,23 +21,49 @@
 </div>
 </header>
 <body>
-<div class='app'>
-  Application Information
+
+<div class='top'>
+  <div class='left'>
+  </div>
+  <div class='right'>
+    <ul>
+      Log in
+    </ul>
+  </div>
 </div>
-<div id="formbox">
-  <form action="/login" method="POST">
-      <div>
-          <label>Username:</label>
-          <input type="text" name="username" value="yuriyerastov"/>
+
+<div class='app'>
+  <p class="app-title">
+    Language Analyzer
+  </p>
+  <p class="app-description">
+    Get text analytics for any website.
+  </p>
+</div>
+
+<div class="formbox">
+  <div class="innerbox">
+    <form action="/login" method="POST">
+        <p class='account'>
+          <a href="#">Create an account</a>
+        </p>
+        <div class="label">
+          Username
+        </div>
+        <div class="entry">
+          <input class="field" type="text" name="username" value="yuriyerastov"/>
+        </div>
+        <div class="label">
+          Password
+        </div>
+        <div class="entry">
+          <input class="field" type="password" name="password" value="password%@#@"/>
+        </div>
+      <div class='login'>
+        <input class="field"  id="sub" type="submit" value="Log in"/>
       </div>
-      <div>
-          <label>Password:</label>
-          <input type="password" name="password" value="password%@#@"/>
-      </div>
-      <div>
-          <input type="submit" value="Log In"/>
-      </div>
-  </form>
+    </form>
+  </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
 

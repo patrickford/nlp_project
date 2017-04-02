@@ -107,6 +107,7 @@ function postData(url) {
     }
 
     function writeSentiment(object){
+      $("#sentiment").hide()
       var compScore = object.comparative
       var posWords = object.positive
       var negWords = object.negative
@@ -121,7 +122,6 @@ function postData(url) {
         html = html + posWords[i] + '<br>'
       }
       $("#positive").html(html)
-      //html++ "Negative Words"
     }
 
       $.ajax(settings).done(function(res) {
@@ -131,12 +131,20 @@ function postData(url) {
           return b[2] - a[2];
         })
         $(".buttons").children().show()
+        $(".outputMenu").children().show()
         writeOutput(taggedArray, "#tagged")
         writeOutput(res.bigrams, "#bigrams")
         writeOutput(res.trigrams, "#trigrams")
         writeSentiment(res.sentiment)
       });
 }
+
+$('a').click(function(e) {
+    //e.preventDefault();
+    $(".outputMenu a").removeClass("on");
+    $(".outputMenu a").removeClass("outputMenu");
+    $(this).addClass('on');
+});
 
 function showElement(element) {
   $(".output").children().hide()

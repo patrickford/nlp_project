@@ -1,3 +1,8 @@
+* {
+  font-family: helvetica;
+  font-size: 12px;
+}
+
 .app-box {
   padding: 20px;
 }
@@ -12,6 +17,10 @@
 }
 
 .buttons a:hover {
+   background-color: #A9A9A9;
+}
+
+.buttons a {
    background-color: #A9A9A9;
 }
 
@@ -35,6 +44,33 @@ td {
 
 th, td {
     border-bottom: 1px solid #ddd;
+}
+
+.outputMenu {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.outputMenu a.on {
+  background-color: #00FFFF;
+  color: #000000;
+  text-align: center;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.outputMenu a {
+  background-color: #D3D3D3;
+  color: #000000;
+  text-align: center;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.outputMenu a:hover {
+  background-color: #A9A9A9;
 }
 
 
