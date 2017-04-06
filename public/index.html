@@ -12,38 +12,29 @@
   <title>Language Analyzer</title>
 </head>
 <header>
-  <div class='app'>
-    <p class="title">
 
-    </p>
-    <p class="subtext">
-    </p>
-</div>
 </header>
 <body>
-
-<div class='top'>
-  <div class='left'>
-  </div>
-  <div class='right'>
-    <ul>
+  <div class="top-menu">
+    <p class="right-menu">
       Log in
-    </ul>
+    </p>
   </div>
-</div>
 
-<div class='app'>
-  <p class="app-title">
-    Language Analyzer
-  </p>
-  <p class="app-description">
-    Get text analytics for any website.
-  </p>
-</div>
+
+  <div class='app'>
+    <p class="app-title">
+      Language Analyzer
+    </p>
+    <p class="app-description">
+      Get text analytics for any website.<br>
+      All you need is a URL.
+    </p>
+  </div>
 
 <div class="formbox">
   <div class="innerbox">
-    <form action="/login" method="POST">
+    <form>
         <p class='account'>
           <a href="#">Create an account</a>
         </p>
@@ -51,13 +42,13 @@
           Username
         </div>
         <div class="entry">
-          <input class="field" type="text" name="username" value="yuriyerastov"/>
+          <input class="field" id="username" type="text" name="username" value="yuriyerastov"/>
         </div>
         <div class="label">
           Password
         </div>
         <div class="entry">
-          <input class="field" type="password" name="password" value="password%@#@"/>
+          <input class="field" id="password" type="password" name="password" value="password%@#@"/>
         </div>
       <div class='login'>
         <input class="field"  id="sub" type="submit" value="Log in"/>
@@ -66,6 +57,7 @@
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="/client.js"> </script>
 
 
 

@@ -1,37 +1,19 @@
-* {
+body {
   font-family: helvetica;
   font-size: 12px;
+  margin: 0;
+  padding: 0;
+  display:inline-block;
 }
 
-.app-box {
-  padding: 20px;
+
+.outer {
+  /*margin-top: 45px;*/
+  margin-left: 30px;
+  margin-top: 70px;
+
 }
 
-.buttons a {
-  background-color: #D3D3D3;
-  color: #000000;
-  text-align: center;
-  text-decoration: none;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-.buttons a:hover {
-   background-color: #A9A9A9;
-}
-
-.buttons a {
-   background-color: #A9A9A9;
-}
-
-.buttons {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-/*tr:nth-child(even) {
-    background-color: #D3D3D3;
-}*/
 
 table {
   border-collapse: collapse;
@@ -52,8 +34,8 @@ th, td {
 }
 
 .outputMenu a.on {
-  background-color: #00FFFF;
-  color: #000000;
+  background-color: #0080ff;
+  color: #ffffff;
   text-align: center;
   text-decoration: none;
   padding: 5px;
@@ -70,10 +52,85 @@ th, td {
 }
 
 .outputMenu a:hover {
-  background-color: #A9A9A9;
+  background-color: #0080ff;
+  color: #ffffff;
+}
+
+#sentimentWords {
+  display: inline-block;
+}
+
+/*#logout {
+  padding-left: 60px;
+}*/
+
+#user {
+  border: solid 1px black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+ul {
+    margin: 0;
+}
+
+.top-menu {
+  width: 100%;
+  height: 40px;
+  background-color: #e6e6e6;
+  margin: auto;
+  position: fixed;
+  font-family: Helvetica;
+  font-size: large;
+  padding-top: 5px;
 }
 
 
-/*.buttons {
-  visibility: hidden;
-}*/
+.top-menu ul {
+    list-style-type: none;
+    text-align: right;
+}
+
+.top-menu .right ul li {
+  display: inline;
+}
+
+.right {
+  margin-top: 7px;
+  margin-right: 15px;
+  font-size: 10pt;
+}
+
+#logout {
+  margin-left: 5px;
+}
+
+.top-menu a {
+  text-decoration: none;
+}
+
+.top-menu a:hover {
+  text-decoration: none;
+  background-color: #C0C0C0;
+  padding: 5px;
+  color: white;
+}
+
+form {
+  display: block;
+  width: 600px;
+}
+
+#clientData {
+  height: 34px;
+  width: 80px;
+  margin-left: -4px;
+  font-size: larger;
+}
+
+.js-query {
+    height: 28px;
+    width: 500px;
+    font-size: larger;
+    margin-top: 12px;
+}

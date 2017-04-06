@@ -59,7 +59,9 @@ app.post('/login',
   passport.authenticate('local', {session: true}),
   function(req, res) {
     console.log(req.user)
-    res.redirect('/nlp.html');
+    console.log(req.user.lastName)
+    var userFull = req.user.firstName + ' ' + req.user.lastName
+    res.json({'user': userFull});
   });
 
 

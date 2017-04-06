@@ -1,3 +1,4 @@
+var response;
 function deconstruct(obj) {
   var temp = []
   for (item in obj) {
@@ -115,13 +116,18 @@ function postData(url) {
       var html = ''
       html = `<p>Sentiment comparative score: ${compScore}.<p>`
       $("#score").html(html)
-
-      $("#positive").html("<p class='block'>Positive Words</p>")
       html = ''
+      html = html + "<p class='block'>Positive Words</p>"
       for (var i=0; i<posWords.length; i++) {
         html = html + posWords[i] + '<br>'
       }
       $("#positive").html(html)
+      html = ''
+      html = html + "<p class='block'>Negative Words</p>"
+      for (var i=0; i<posWords.length; i++) {
+        html = html + posWords[i] + '<br>'
+      }
+      $("#negative").html(html)
     }
 
       $.ajax(settings).done(function(res) {
@@ -156,3 +162,49 @@ $('#clientData').on('click', function(e){
     var url = $('#link').val();
     postData(url);
   })
+
+  function postLogin(_user, _pass) {
+      var settings = {
+        //url: '/login?username=' + _user + '&password=' +
+        //_pass,
+        url: 'login',
+        data: {
+          "username": _user,
+          "password": _pass
+        },
+        type: 'POST',
+        error: function badData(err) {
+          console.log(url)
+          console.log(err);
+        }
+        // success: function(data) {
+        //   //document.location = "url"
+        // }
+      }
+      $.ajax(settings).done(function(res) {
+        response = res
+        console.log(response.user)
+        $(location).attr('href', '/nlp.html')
+        localStorage.setItem("authName", response.user);
+      });
+    }
+
+  $('form').on('submit', function(e){
+    e.preventDefault();
+    var user = $("#username").val();
+    var pass = $("#password").val()
+    postLogin(user, pass)
+  })
+
+function capture() {
+  console.log(response)
+  var authorizedUser = localStorage.getItem("authName")
+  console.log(authorizedUser)
+}
+
+
+function addUser() {
+  var authorizedUser = localStorage.getItem("authName");
+    $('#user').append(authorizedUser);
+    console.log(authorizedUser);
+};

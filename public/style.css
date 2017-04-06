@@ -3,13 +3,30 @@
   box-sizing: border-box;
 }
 
-body {
-  width: 100%;
+body, html {
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
+
+.top-menu {
+  vertical-align: middle;
+  height: 30px;
+  background-color: #F5F5F5;
+}
+
+.right-menu {
+  vertical-align: middle;
+  text-align: right;
+  margin-right: 20px;
+  padding, border, margin: 0;
+
+}
+
+
 
 .formbox {
   margin-top: 25%;
-  background-color:
 }
 
 .innerbox {
@@ -28,7 +45,7 @@ form {
   padding-bottom: 20px;
   padding-right: 20px;
   border-radius: 5px;
-  border-style: groove;
+  border: solid grey;
 }
 
 .entry {
@@ -59,4 +76,8 @@ form {
     border-style: none;
     border-radius: 5px;
     color: #ffffff;
+}
+
+.right {
+  float: right;
 }
