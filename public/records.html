@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -7,15 +8,12 @@
   <meta name="viewport" content="width=device-width">
   <title>NLP app</title>
 </head>
+<header>
+</div>
+</header>
 
-<body onload="addUser()">
+<body>
   <div class="top-menu">
-    <div class="left">
-      <ul>
-        <li id="us">Another link</li>
-        <li id='log'><a onclick="" href="#">Analysis history</a></li>
-      </ul>
-    </div>
     <div class="right">
       <ul>
         <li id="user"></li>
@@ -24,15 +22,16 @@
     </div>
   </div>
   <div class="outer">
+    <form class="get-records" action="/login" method="GET">
+        <div>
+            <!-- <label for="query"></label>
+            <input class="js-query" id="link" type="text" name="URL" placeholder="enter a URL to analyze" value="http://www.bbc.com/news/uk-politics-39422353"/> -->
+            <input id="get-request" type="submit" value="Submit"/>
+        </div>
+    </form>
+
     <div class="app-box">
       <div id="formbox">
-        <form class="js-search-form" action="/login" method="POST">
-            <div>
-                <label for="query"></label>
-                <input class="js-query" id="link" type="text" name="URL" placeholder="enter a URL to analyze" value="http://www.bbc.com/news/uk-politics-39422353"/>
-                <input id="clientData" type="submit" value="Analyze"/>
-            </div>
-        </form>
       </div>
     </div>
     <div>
@@ -67,5 +66,5 @@
 
 </body>
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-<script src="./client.js"></script>
+<script src="./records.js"></script>
 </html>

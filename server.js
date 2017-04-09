@@ -8,7 +8,7 @@ const tokenizer = new natural.WordTokenizer;
 const pos = require('pos');
 const tagger = new pos.Tagger();
 const {DATABASE_URL, PORT} = require('./config');
-const {userData, User} = require('./models');
+const {analysisData, User} = require('./models');
 const app = express();
 const passport = require('passport');
 const jsonParser = bodyParser.json();
@@ -56,12 +56,26 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
 passport.use(localStrategy);
 
 app.post('/login',
-  passport.authenticate('local', {session: true}),
+  passport.authenticate('local', {
+    //successRedirect: '/nlp.html',
+    failureRedirect: '/',
+    session: true
+  }),
   function(req, res) {
-    console.log(req.user)
-    console.log(req.user.lastName)
-    var userFull = req.user.firstName + ' ' + req.user.lastName
-    res.json({'user': userFull});
+    console.log(req);
+    var lastName = req.user.lastName
+    var firstName = req.user.firstName
+    var fullName = firstName + ' ' + lastName
+    console.log(fullName)
+    res.send(fullName)
+  });
+
+
+  app.get('/logout', function(req, res){
+    console.log(request)
+    req.logout();
+    console.log("user logged out")
+    res.redirect('/');
   });
 
 
@@ -97,10 +111,13 @@ function sortArray(arr) {
   })
 }
 
-
-app.get('/posts', (req, res) => {
-  userData
-    .find({"username":"yuri2"})
+app.get('/history', (req, res) => {
+  if (req.user) {
+    console.log("User is already authenticated")
+    console.log(req.user.username)
+  }
+  analysisData
+    .find({"username":req.user.username})
     .exec()
     .then(posts => {
       res.json(posts.map(post => post.apiRepr()));
@@ -110,7 +127,6 @@ app.get('/posts', (req, res) => {
       res.status(500).json({error: 'something went terribly wrong'});
     });
 });
-
 
 app.post('/user', (req, res) => {
   if (!req.body) {
@@ -170,6 +186,11 @@ app.post('/posts', jsonParser, (req, res) => {
   if (req.user) {
     console.log("User is already authenticated")
   }
+  if (!req.user) {
+    console.log("test")
+    res.status(400).json({message: "unauthenticed"})
+    // return res.redirect("/")
+  }
   const requiredFields = ['text'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -198,7 +219,7 @@ app.post('/posts', jsonParser, (req, res) => {
   var taggedWords = tagger.tag(tokens);
   var taggedWordsFreq = countNgrams(taggedWords, 2)
   //var wordsFiltered = filterObject(taggedWordsFreq, 2)
-  console.log(taggedWordsFreq);
+  //console.log(taggedWordsFreq);
   responseObject['tagged'] = taggedWordsFreq;
   var NGrams = natural.NGrams;
   var bigrams = NGrams.ngrams(tokens, 2);
@@ -211,7 +232,7 @@ app.post('/posts', jsonParser, (req, res) => {
   responseObject['trigrams'] = trigramsFiltered;
   var sentimentAnalysis = sentiment(target);
   responseObject['sentiment'] = sentimentAnalysis;
-  userData
+  analysisData
     .create({
       text: responseObject,
       username: 'yuriyerastov'
@@ -224,43 +245,37 @@ app.post('/posts', jsonParser, (req, res) => {
   });
 });
 
-app.delete('/posts/:id', (req, res) => {
-  userData
+app.delete('/analysis/:id', (req, res) => {
+  //console.log(req)
+  analysisData
     .findByIdAndRemove(req.params.id)
     .exec()
     .then(() => {
       res.status(204).json({message: 'success'});
     })
     .catch(err => {
-      console.error(err);
+      // console.error(err);
       res.status(500).json({error: 'something went terribly wrong'});
     });
 });
 
-app.put('/posts/:id', (req, res) => {
-  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-    res.status(400).json({
-      error: 'Request path id and request body id values must match'
-    });
-  }
-  const updated = {};
-  const updateableFields = ['username', 'text'];
-  updateableFields.forEach(field => {
-    if (field in req.body) {
-      updated[field] = req.body[field];
-    }
-  });
-  userData
-    .findByIdAndUpdate(req.params.id, {$set: updated}, {new: true})
+app.put('/user', (req, res) => {
+  analysisData
+    .findOneAndUpdate({username:req.body.username}, {$set:
+      {
+        firstName : req.body.first,
+        lastName : req.body.last
+      }
+    })
     .exec()
-    .then(updatedPost => res.status(201).json(updatedPost.apiRepr()))
+    .then(user => res.status(200).json(user))
     .catch(err => res.status(500).json({message: 'Something went wrong'}));
 });
-
 
 app.use('*', function(req, res) {
   res.status(404).json({message: 'Not Found'});
 });
+
 
 let server;
 

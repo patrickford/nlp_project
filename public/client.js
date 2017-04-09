@@ -87,7 +87,7 @@ function postData(url) {
     },
     error: function badData(err) {
       console.log(err);
-      $(".glossed-output").append("Server Error");
+       window.location = "/";
     }
   };
 
@@ -124,8 +124,8 @@ function postData(url) {
       $("#positive").html(html)
       html = ''
       html = html + "<p class='block'>Negative Words</p>"
-      for (var i=0; i<posWords.length; i++) {
-        html = html + posWords[i] + '<br>'
+      for (var i=0; i<negWords.length; i++) {
+        html = html + negWords[i] + '<br>'
       }
       $("#negative").html(html)
     }
@@ -175,17 +175,15 @@ $('#clientData').on('click', function(e){
         type: 'POST',
         error: function badData(err) {
           console.log(url)
-          console.log(err);
+          console.log(err)
         }
         // success: function(data) {
         //   //document.location = "url"
         // }
       }
       $.ajax(settings).done(function(res) {
-        response = res
-        console.log(response.user)
         $(location).attr('href', '/nlp.html')
-        localStorage.setItem("authName", response.user);
+        sessionStorage.setItem("authName", res);
       });
     }
 
@@ -202,9 +200,26 @@ function capture() {
   console.log(authorizedUser)
 }
 
-
 function addUser() {
-  var authorizedUser = localStorage.getItem("authName");
+  var authorizedUser = sessionStorage.getItem("authName");
     $('#user').append(authorizedUser);
     console.log(authorizedUser);
 };
+
+function logOut() {
+  var settings = {
+    url: '/logout',
+    // dataType: "json",
+    // contentType: "application/json",
+    // processData: "false",
+    method: 'GET',
+    success: function displayData(data) {
+      console.log(data);
+    },
+    error: function badData(err) {
+      console.log(err);
+    }
+  };
+  $.ajax(settings);
+  window.location = "/";
+}
