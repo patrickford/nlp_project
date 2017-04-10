@@ -11,55 +11,62 @@
   <meta name="viewport" content="width=device-width">
   <title>Language Analyzer</title>
 </head>
-<header>
-
-</header>
 <body>
   <div class="top-menu">
-    <p class="right-menu">
-      Log in
-    </p>
+    <div class="left">
+      <ul>
+        <li><a onclick="" href="/nlp.html">Analyze</a></li>
+        <li><a onclick="" href="/records.html">My history</a></li>
+        <li> <a onclick="" href="/account.html">My account</a></li>
+      </ul>
+    </div>
+    <div class="right">
+      <ul>
+        <li id="user"></li>
+        <li id='logout'><a onclick="logOut()" href="#">Log out</a></li>
+      </ul>
+    </div>
   </div>
 
 
-  <div class='app'>
-    <p class="app-title">
-      Language Analyzer
-    </p>
-    <p class="app-description">
-      Get text analytics for any website.<br>
-      All you need is a URL.
-    </p>
-  </div>
-
-<div class="formbox">
-  <div class="innerbox">
-    <form >
-        <p class='account'>
-          <a href="#">Create an account</a>
-        </p>
-        <div class="label">
-          Username
-        </div>
-        <div class="entry">
-          <input class="field" id="username" type="text" name="username" value="yuriyerastov"/>
-        </div>
-        <div class="label">
-          Password
-        </div>
-        <div class="entry">
-          <input class="field" id="password" type="password" name="password" value="password%@#@"/>
-        </div>
-      <div class='login'>
-        <input class="field"  id="sub" type="submit" value="Log in"/>
+  <div class="outer">
+    <div class="formbox">
+      <div class="innerbox">
+        <form >
+            <p class='account'>
+              <a href="#">Create an account</a>
+            </p>
+            <div class="label">
+              Username
+            </div>
+            <div class="entry">
+              <input class="field" id="username" type="text" name="username" value="yuriyerastov"/>
+            </div>
+            <div class="label">
+              Password
+            </div>
+            <div class="entry">
+              <input class="field" id="password" type="password" name="password" value="password%@#@"/>
+            </div>
+          <div class='login'>
+            <input class="field"  id="sub" type="submit" value="Log in"/>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
+
+    <div class='app'>
+      <p class="app-title">
+        Language Analyzer
+      </p>
+      <p class="app-description">
+        Get text analytics for any website.<br>
+        All you need is a URL.
+      </p>
+    </div>
+
   </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-<script src="/client.js"> </script>
-
-
-
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  <script src="/client.js"> </script>
 </body>
 </html>

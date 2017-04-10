@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -8,63 +8,31 @@
   <meta name="viewport" content="width=device-width">
   <title>NLP app</title>
 </head>
-<header>
-</div>
-</header>
 
-<body>
+<body onload="addUser(); getData()" >
   <div class="top-menu">
+    <div class="left">
+      <ul>
+        <li><a onclick="" href="/nlp.html">Analyze</a></li>
+        <li><a onclick="" href="/records.html">My history</a></li>
+        <li> <a onclick="" href="/account.html">My account</a></li>
+      </ul>
+    </div>
     <div class="right">
       <ul>
         <li id="user"></li>
-        <li id='logout'><a onclick="logOut()" href="#">log out</a></li>
+        <li id="logout"><a onclick="logOut()" href="#">Log out</a></li>
       </ul>
     </div>
   </div>
   <div class="outer">
-    <form class="get-records" action="/login" method="GET">
-        <div>
-            <!-- <label for="query"></label>
-            <input class="js-query" id="link" type="text" name="URL" placeholder="enter a URL to analyze" value="http://www.bbc.com/news/uk-politics-39422353"/> -->
-            <input id="get-request" type="submit" value="Submit"/>
-        </div>
-    </form>
-
-    <div class="app-box">
-      <div id="formbox">
-      </div>
+    <div class="output">
     </div>
-    <div>
-      <div class="outputMenu">
-        <a onclick="showElement(tagged)" href="#" hidden>tagged words</a>
-        <a onclick="showElement(bigrams)" href="#" hidden>bigrams</a>
-        <a onclick="showElement(trigrams)" href="#" hidden>trigrams</a>
-        <a onclick="showElement(sentiment)" href="#" hidden>sentiment</a>
-      </div>
-        <div class="output">
-          <div id="tagged">
-          </div>
-          <div id="bigrams">
-          </div>
-          <div id="trigrams">
-          </div>
-          <div id="sentiment">
-            <div id="score">
-            </div>
-            <div id="sentimentWords">
-              <div id="positive">
-              </div>
-              <div id="negative">
-              </div>
-              <div id='clear'>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  </div>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="./common.js"></script>
 <script src="./records.js"></script>
+
 </html>

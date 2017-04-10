@@ -68,8 +68,3 @@ function getData() {
     $(".output").html(htmlCode);
   });
 }
-
-$('.get-records').on('submit', function(e){
-  e.preventDefault();
-  getData();
-})

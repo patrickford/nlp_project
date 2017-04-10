@@ -199,27 +199,3 @@ function capture() {
   var authorizedUser = localStorage.getItem("authName")
   console.log(authorizedUser)
 }
-
-function addUser() {
-  var authorizedUser = sessionStorage.getItem("authName");
-    $('#user').append(authorizedUser);
-    console.log(authorizedUser);
-};
-
-function logOut() {
-  var settings = {
-    url: '/logout',
-    // dataType: "json",
-    // contentType: "application/json",
-    // processData: "false",
-    method: 'GET',
-    success: function displayData(data) {
-      console.log(data);
-    },
-    error: function badData(err) {
-      console.log(err);
-    }
-  };
-  $.ajax(settings);
-  window.location = "/";
-}
