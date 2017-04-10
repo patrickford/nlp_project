@@ -235,7 +235,7 @@ app.post('/posts', jsonParser, (req, res) => {
   analysisData
     .create({
       text: responseObject,
-      username: 'yuriyerastov'
+      username: req.user.username
     })
     .then(returnedPost => res.status(201).json(responseObject))
     .catch(err => {

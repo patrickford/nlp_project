@@ -16,4 +16,11 @@ r1 = requests.post('https://murmuring-ridge-56754.herokuapp.com/user', json={
     "lastName" : "Yerastov"
 })
 
-print r2.json()
+r3 = requests.post('https://murmuring-ridge-56754.herokuapp.com/user', json={
+    "username" : "MYE",
+    "password" : "test",
+    "firstName" : "Michael",
+    "lastName" : "Echeverria"
+})
+
+print r3.json()
