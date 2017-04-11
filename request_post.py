@@ -23,4 +23,20 @@ r3 = requests.post('https://murmuring-ridge-56754.herokuapp.com/user', json={
     "lastName" : "Echeverria"
 })
 
-print r3.json()
+r4 = requests.post('https://murmuring-ridge-56754.herokuapp.com/user', json={
+    "username" : "YuriYerastov",
+    "password" : "test",
+    "firstName" : "Yuri",
+    "lastName" : "Yuri Yerastov",
+    "email": "yerastov@hotmail.com"
+})
+
+r5 = requests.post('http://localhost:8080/user', json={
+    "username" : "yurik",
+    "password" : "test",
+    "firstName" : "Yuri",
+    "lastName" : "Yerastov",
+    "email": "yerastov@hotmail.com"
+})
+
+print r5.json()

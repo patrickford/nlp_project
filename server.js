@@ -67,7 +67,7 @@ app.post('/login',
     var firstName = req.user.firstName
     var fullName = firstName + ' ' + lastName
     console.log(fullName)
-    res.send(fullName)
+    res.send(req.user)
   });
 
 
@@ -135,7 +135,7 @@ app.post('/user', (req, res) => {
   if (!('username' in req.body)) {
     return res.status(422).json({message: 'Missing field: username'});
   }
-  let {username, password, firstName, lastName} = req.body;
+  let {username, password, firstName, lastName, email} = req.body;
   if (typeof username !== 'string') {
     return res.status(422).json({message: 'Incorrect field type: username'});
   }
@@ -170,7 +170,8 @@ app.post('/user', (req, res) => {
           username: username,
           password: hash,
           firstName: firstName,
-          lastName: lastName
+          lastName: lastName,
+          email: email
         })
     })
     .then(user => {
@@ -260,11 +261,12 @@ app.delete('/analysis/:id', (req, res) => {
 });
 
 app.put('/user', (req, res) => {
-  analysisData
+  User
     .findOneAndUpdate({username:req.body.username}, {$set:
       {
         firstName : req.body.first,
-        lastName : req.body.last
+        lastName : req.body.last,
+        email: req.body.email
       }
     })
     .exec()
@@ -313,8 +315,6 @@ function closeServer() {
   });
 }
 
-// if server.js is called directly (aka, with `node server.js`), this block
-// runs. but we also export the runServer command so other code (for instance, test code) can start the server as needed.
 if (require.main === module) {
   runServer().catch(err => console.error(err));
 };

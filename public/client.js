@@ -7,25 +7,6 @@ function deconstruct(obj) {
   return temp
 }
 
-function putData(userUID) {
-  var settings = {
-    url: `/blogs/${userUID}`,
-    dataType: "json",
-    data: {'author': 'new name',
-            'content': 'new content',
-            'title' : 'new title'
-            },
-    method: 'PUT',
-    success: function displayData(data) {
-      console.log(data);
-    },
-    error: function badData(err) {
-      console.log(err);
-    }
-  };
-  $.ajax(settings);
-}
-
 function deleteData(userUID) {
   var settings = {
     url:   `/blogs/${userUID}`,
@@ -177,13 +158,17 @@ $('#clientData').on('click', function(e){
           console.log(url)
           console.log(err)
         }
-        // success: function(data) {
-        //   //document.location = "url"
-        // }
       }
       $.ajax(settings).done(function(res) {
+        var lastName = res.lastName
+        var firstName = res.firstName
+        var fullName = firstName + ' ' + lastName
+        sessionStorage.setItem("authName", fullName);
+        sessionStorage.setItem("email", res.email);
+        sessionStorage.setItem("first", res.firstName);
+        sessionStorage.setItem("last", res.lastName);
+        sessionStorage.setItem("user", res.username);
         $(location).attr('href', '/nlp.html')
-        sessionStorage.setItem("authName", res);
       });
     }
 
@@ -193,9 +178,3 @@ $('#clientData').on('click', function(e){
     var pass = $("#password").val()
     postLogin(user, pass)
   })
-
-function capture() {
-  console.log(response)
-  var authorizedUser = localStorage.getItem("authName")
-  console.log(authorizedUser)
-}

@@ -1,8 +1,4 @@
-
-
 <!DOCTYPE html>
-
-
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -11,7 +7,7 @@
   <meta name="viewport" content="width=device-width">
   <title>Language Analyzer</title>
 </head>
-<body>
+<body onload="fillUser()" >
   <div class="top-menu">
     <div class="left">
       <ul>
@@ -39,30 +35,14 @@
     </div>
     <div class="formbox">
       <div class="innerbox">
-        <form >
-            <p class='account'>
-              <a href="/new-account.html">Create an account</a>
-            </p>
-            <div class="label">
-              Username
-            </div>
-            <div class="entry">
-              <input class="field" id="username" type="text" name="username" value="yurik4"/>
-            </div>
-            <div class="label">
-              Password
-            </div>
-            <div class="entry">
-              <input class="field" id="password" type="password" name="password" value="test"/>
-            </div>
-          <div class='login'>
-            <input class="field"  id="sub" type="submit" value="Log in"/>
-          </div>
+        <form>
+
         </form>
       </div>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-  <script src="/client.js"> </script>
+  <!-- <script src="/client.js"> </script> -->
+  <script src="/update_account.js"> </script>
 </body>
 </html>

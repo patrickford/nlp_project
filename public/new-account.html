@@ -1,8 +1,4 @@
-
-
 <!DOCTYPE html>
-
-
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -40,29 +36,56 @@
     <div class="formbox">
       <div class="innerbox">
         <form >
-            <p class='account'>
-              <a href="/new-account.html">Create an account</a>
-            </p>
             <div class="label">
               Username
             </div>
             <div class="entry">
-              <input class="field" id="username" type="text" name="username" value="yurik4"/>
+              <input class="field" id="username" type="text" name="username" value=""/>
             </div>
+
+            <div class="label">
+              First name
+            </div>
+            <div class="entry">
+              <input class="field" id="first" type="text" name="first" value=""/>
+            </div>
+
+            <div class="label">
+              Last name
+            </div>
+            <div class="entry">
+              <input class="field" id="last" type="text" name="username" value=""/>
+            </div>
+
+            <div class="label">
+              Email
+            </div>
+            <div class="entry">
+              <input class="field" id="email" type="text" name="email" value=""/>
+            </div>
+
             <div class="label">
               Password
             </div>
             <div class="entry">
-              <input class="field" id="password" type="password" name="password" value="test"/>
+              <input class="field" id="password1" type="password" name="password" value=""/>
+            </div>
+
+            <div class="label">
+              Reenter password
+            </div>
+            <div class="entry">
+              <input class="field" id="password2" type="password" name="password" value=""/>
             </div>
           <div class='login'>
-            <input class="field"  id="sub" type="submit" value="Log in"/>
+            <input class="field"  id="sub" type="submit" value="Create an account"/>
           </div>
         </form>
       </div>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-  <script src="/client.js"> </script>
+  <!-- <script src="/client.js"> </script> -->
+  <script src="/new_account.js"> </script>
 </body>
 </html>
