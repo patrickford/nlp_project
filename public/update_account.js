@@ -10,7 +10,7 @@ function putData(_user, _first, _last, _email) {
     data: JSON.stringify(dataObject),
     contentType: "application/json",
     dataType: "json",
-    // processData: "false",
+    processData: "false",
     success: function displayData(data) {
       console.log(data);
     },
