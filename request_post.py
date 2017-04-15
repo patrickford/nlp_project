@@ -39,4 +39,8 @@ r5 = requests.post('http://localhost:8080/user', json={
     "email": "yerastov@hotmail.com"
 })
 
-print r5.json()
+r6 = requests.post('http://localhost:8080/record', json={
+    "id" : "58e04272b767330869754252"
+})
+
+print r6.json()

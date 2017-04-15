@@ -1,4 +1,3 @@
-var response;
 function deconstruct(obj) {
   var temp = []
   for (item in obj) {
@@ -7,55 +6,20 @@ function deconstruct(obj) {
   return temp
 }
 
-function deleteData(userUID) {
-  var settings = {
-    url:   `/blogs/${userUID}`,
-    dataType: "jsonp",
-    method: 'DELETE',
-    success: function displayData(data) {
-      console.log(data);
-    },
-    error: function badData(err) {
-      console.log(err);
-    }
-  };
-  $.ajax(settings);
-}
 
-function getData() {
-  var results = '';
-  var settings = {
-    url: '/auth',
-    data: JSON.stringify({
-      username: 'yuriyerastov',
-      password: 'password%@#@'
-   }),
-    dataType: "json",
-    contentType: "application/json",
-    processData: "false",
-    method: 'GET',
-    success: function displayData(data) {
-      console.log(data);
-    },
-    error: function badData(err) {
-      console.log(err);
-    }
-  };
-  $.ajax(settings);
-}
 
-function postData(url) {
+function postData(_url, _description) {
   var settings = {
     url: '/posts',
     data: JSON.stringify({
-     username : "yuri",
-     text: url
+      url: _url,
+      description: _description
    }),
     contentType: "application/json",
     processData: "false",
     method: 'POST',
-
     success: function displayData(data) {
+      console.log(data)
       var bigramArray = data.bigrams
       bigramArray.sort(function(a, b) {
           return b[2] - a[2]
@@ -64,7 +28,6 @@ function postData(url) {
       trigramArray.sort(function(a, b) {
           return b[3] - a[3]
       })
-
     },
     error: function badData(err) {
       console.log(err);
@@ -111,6 +74,11 @@ function postData(url) {
       $("#negative").html(html)
     }
 
+    function writeRaw(string) {
+      $("#raw").hide();
+      $("#raw").html(string);
+    }
+
       $.ajax(settings).done(function(res) {
         var tagged = res.tagged;
         var taggedArray = deconstruct(tagged)
@@ -123,11 +91,11 @@ function postData(url) {
         writeOutput(res.bigrams, "#bigrams")
         writeOutput(res.trigrams, "#trigrams")
         writeSentiment(res.sentiment)
+        writeRaw(res.raw);
       });
 }
 
 $('a').click(function(e) {
-    //e.preventDefault();
     $(".outputMenu a").removeClass("on");
     $(".outputMenu a").removeClass("outputMenu");
     $(this).addClass('on');
@@ -138,16 +106,17 @@ function showElement(element) {
   $(element).show()
 }
 
-$('#clientData').on('click', function(e){
+$('#intake').on('submit', function(e){
     e.preventDefault();
+    $('.output').children().hide();
     var url = $('#link').val();
-    postData(url);
+    var description = $('#description').val();
+    console.log(description)
+    postData(url, description);
   })
 
   function postLogin(_user, _pass) {
       var settings = {
-        //url: '/login?username=' + _user + '&password=' +
-        //_pass,
         url: 'login',
         data: {
           "username": _user,
@@ -155,7 +124,6 @@ $('#clientData').on('click', function(e){
         },
         type: 'POST',
         error: function badData(err) {
-          console.log(url)
           console.log(err)
         }
       }
@@ -172,7 +140,7 @@ $('#clientData').on('click', function(e){
       });
     }
 
-  $('form').on('submit', function(e){
+  $("#client-login").on('submit', function(e){
     e.preventDefault();
     var user = $("#username").val();
     var pass = $("#password").val()

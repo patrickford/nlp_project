@@ -128,6 +128,22 @@ app.get('/history', (req, res) => {
     });
 });
 
+app.post('/record', (req, res) => {
+  if (req.user) {
+    console.log("User is already authenticated")
+    console.log(req.user.username)
+  }
+  var id = req.body.id;
+  analysisData.findById(id, function (err, record){
+    // console.log(record)
+    // console.log(record.text)
+    res.status(200).send(record);
+  })
+
+});
+
+
+
 app.post('/user', (req, res) => {
   if (!req.body) {
     return res.status(400).json({message: 'No request body'});
@@ -184,66 +200,57 @@ app.post('/user', (req, res) => {
 });
 
 app.post('/posts', jsonParser, (req, res) => {
-  if (req.user) {
-    console.log("User is already authenticated")
-  }
-  if (!req.user) {
-    console.log("test")
-    res.status(400).json({message: "unauthenticed"})
-    // return res.redirect("/")
-  }
-  const requiredFields = ['text'];
-  for (let i=0; i<requiredFields.length; i++) {
-    const field = requiredFields[i];
-    if (!(field in req.body)) {
-      const message = `Missing \`${field}\` in request body`
-      //console.error(message);
-      return res.status(400).send(message);
-    }
-  }
-  var url = req.body['text'];
-  temp = [];
   responseObject = {};
-  return request(url, function (error, response, body) {
-    console.log('error:', error);
-    console.log('statusCode:', response && response.statusCode);
-    var matches = body.match(/<\w.*>.*<.p>/g);
-    for (var i=0; i<matches.length; i++ ) {
-      var cleaned = matches[i].replace(/<[^</]>/g, '');
-      var cleaned2 = cleaned.replace(/<\w*[^<]*>/g, '')
-      temp.push(cleaned2)
-    }
-  var target = temp.join("\n\n ");
-  responseObject['raw'] = target;
-  var tokenizer = new natural.WordTokenizer();
-  var tokens = tokenizer.tokenize(target);
-  var taggedWords = tagger.tag(tokens);
-  var taggedWordsFreq = countNgrams(taggedWords, 2)
-  //var wordsFiltered = filterObject(taggedWordsFreq, 2)
-  //console.log(taggedWordsFreq);
-  responseObject['tagged'] = taggedWordsFreq;
-  var NGrams = natural.NGrams;
-  var bigrams = NGrams.ngrams(tokens, 2);
-  var bigramsFreq = countNgrams(bigrams, 2);
-  var bigramsFiltered = filterObject(bigramsFreq, 2);
-  responseObject['bigrams'] = bigramsFiltered;
-  var trigrams = NGrams.ngrams(tokens, 3);
-  var trigramsFreq = countNgrams(trigrams, 3);
-  var trigramsFiltered = filterObject(trigramsFreq, 3);
-  responseObject['trigrams'] = trigramsFiltered;
-  var sentimentAnalysis = sentiment(target);
-  responseObject['sentiment'] = sentimentAnalysis;
-  analysisData
-    .create({
-      text: responseObject,
-      username: req.user.username
+  if (!req.user) {
+    res.status(400).json({message: "unauthenticed"});
+  }
+  else {
+    var url = req.body.url;
+    var description = req.body.description;
+    responseObject['url'] = url;
+    responseObject['description'] = description;
+    temp = [];
+    return request(url, function (error, response, body) {
+      var matches = body.match(/<\w.*>.*<.p>/g);
+      for (var i=0; i<matches.length; i++ ) {
+        var cleaned = matches[i].replace(/<[^</]>/g, '');
+        var cleaned2 = cleaned.replace(/<\w*[^<]*>/g, '');
+        var cleaned3 = cleaned2.replace(/<!/g, '');
+        temp.push(cleaned3)
+      }
+    var target = temp.join("<br><br>");
+    responseObject['raw'] = target;
+    var tokenizer = new natural.WordTokenizer();
+    var tokens = tokenizer.tokenize(target);
+    var tokensLower = tokens.map(function(item){
+      return item.toLowerCase();
     })
-    .then(returnedPost => res.status(201).json(responseObject))
-    .catch(err => {
-        console.error(err);
-        res.status(500).json({error: 'Something went wrong'});
+    var taggedWords = tagger.tag(tokensLower);
+    var taggedWordsFreq = countNgrams(taggedWords, 2)
+    responseObject['tagged'] = taggedWordsFreq;
+    var NGrams = natural.NGrams;
+    var bigrams = NGrams.ngrams(tokensLower, 2);
+    var bigramsFreq = countNgrams(bigrams, 2);
+    var bigramsFiltered = filterObject(bigramsFreq, 2);
+    responseObject['bigrams'] = bigramsFiltered;
+    var trigrams = NGrams.ngrams(tokensLower, 3);
+    var trigramsFreq = countNgrams(trigrams, 3);
+    var trigramsFiltered = filterObject(trigramsFreq, 3);
+    responseObject['trigrams'] = trigramsFiltered;
+    var sentimentAnalysis = sentiment(target);
+    responseObject['sentiment'] = sentimentAnalysis;
+    analysisData
+      .create({
+        text: responseObject,
+        username: req.user.username
+      })
+      .then(returnedPost => res.status(201).json(responseObject))
+      .catch(err => {
+          console.error(err);
+          res.status(500).json({error: 'Something went wrong'});
+      });
     });
-  });
+  };
 });
 
 app.delete('/analysis/:id', (req, res) => {

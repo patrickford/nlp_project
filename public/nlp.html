@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width">
   <title>NLP app</title>
 </head>
-
 <body onload="addUser()">
   <div class="top-menu">
     <div class="left">
@@ -27,23 +26,25 @@
   <div class="outer">
     <div class="app-box">
       <div id="formbox">
-        <form class="js-search-form" action="/login" method="POST">
-            <div>
-                <label for="query"></label>
-                <input class="js-query" id="link" type="text" name="URL" placeholder="enter a URL to analyze" value="http://www.bbc.com/news/uk-politics-39422353"/>
-                <input id="clientData" type="submit" value="Analyze"/>
-            </div>
+        <form id="intake" method="POST">
+            <label class="intake-field" for="male">link for analysis</label>
+            <input class="intake-field" id="link" type="text" name="URL" placeholder="enter a URL to analyze" value="http://www.bbc.com/news/uk-politics-39422353"/>
+            <input class="intake-field" id="description" type="text" name="URL" placeholder="enter a URL to analyze" value="BBC article"/>
+            <input class="intake-field" id="clientData" type="submit" value="Analyze"/>
         </form>
       </div>
     </div>
-    <div>
-      <div class="outputMenu">
-        <a onclick="showElement(tagged)" href="#" hidden>tagged words</a>
-        <a onclick="showElement(bigrams)" href="#" hidden>bigrams</a>
-        <a onclick="showElement(trigrams)" href="#" hidden>trigrams</a>
-        <a onclick="showElement(sentiment)" href="#" hidden>sentiment</a>
-      </div>
+      <div>
+        <div class="outputMenu">
+          <a onclick="showElement(raw)" href="#" hidden>raw text</a>
+          <a onclick="showElement(tagged)" href="#" hidden>tagged words</a>
+          <a onclick="showElement(bigrams)" href="#" hidden>bigrams</a>
+          <a onclick="showElement(trigrams)" href="#" hidden>trigrams</a>
+          <a onclick="showElement(sentiment)" href="#" hidden>sentiment</a>
+        </div>
         <div class="output">
+          <div id="raw">
+          </div>
           <div id="tagged">
           </div>
           <div id="bigrams">

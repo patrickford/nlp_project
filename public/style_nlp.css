@@ -171,3 +171,12 @@ form {
 #clear {
   clear: both;
 }
+
+.intake-field {
+  display: block;
+  width: 600px;
+}
+
+#raw {
+  width: 60%;
+}

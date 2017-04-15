@@ -17,10 +17,10 @@ function deleteRecord(userUID) {
   $.ajax(settings);
 }
 
-function viewRecord(id) {
-
+function saveID(id) {
+  sessionStorage.setItem("selectedRecord", id)
+  window.location.assign('/record.html')
 }
-
 
 function getData() {
   function removeEmpty(array) {
@@ -60,7 +60,8 @@ function getData() {
       var extract = '...' + tokensSelect + '...';
       var remLink = `<a onclick="deleteRecord('${objID}')" href="#">delete</a>`;
       console.log(remLink);
-      var viewLink = `<a onclick="viewRecord(${objID})" href="#">view</a>`;
+      var viewLink = `<a onclick="saveID('${objID}')" href="#">view</a>`;
+      console.log(viewLink)
       var htmlLine = `<tr id="${objID}"><td>${dateTime}</td><td>${extract}</td><td>${viewLink}</td><td>${remLink}</td></tr>`;
       htmlCode = htmlCode + htmlLine;
     });
