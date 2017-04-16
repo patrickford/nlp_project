@@ -1,0 +1,9 @@
+language: node_js
+node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: 93d7c43a-25fc-4aee-a2b9-3acd2af0af28
+  app: murmuring-ridge-56754
+  on:
+    repo: yuriSF/nlp_project
