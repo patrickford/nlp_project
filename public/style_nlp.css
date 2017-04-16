@@ -180,3 +180,11 @@ form {
 #raw {
   width: 60%;
 }
+
+.intake-field {
+  padding: 5px;
+}
+
+.intake-button {
+  padding-top: 5px;
+}

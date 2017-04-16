@@ -62,19 +62,19 @@ app.post('/login',
     session: true
   }),
   function(req, res) {
-    console.log(req);
-    var lastName = req.user.lastName
+    // console.log(req);
+    var lastName = req.user.lastName;
     var firstName = req.user.firstName
     var fullName = firstName + ' ' + lastName
-    console.log(fullName)
+    // console.log(fullName)
     res.send(req.user)
   });
 
 
   app.get('/logout', function(req, res){
-    console.log(request)
+    // console.log(request)
     req.logout();
-    console.log("user logged out")
+    // console.log("user logged out")
     res.redirect('/');
   });
 
