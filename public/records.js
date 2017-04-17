@@ -1,20 +1,3 @@
-
-
-function getData() {
-  function removeEmpty(array) {
-    for (var i=0; i<array.length; i++) {
-      if (array[i]=='') {
-        array.splice(i, 1)
-      }
-    }
-    return array
-  }
-
-function saveID(id) {
-  sessionStorage.setItem("selectedRecord", id)
-  window.location.assign('/record.html')
-}
-
 function deleteRecord(userUID) {
   var settings = {
     url:   `/analysis/${userUID}`,
@@ -29,14 +12,28 @@ function deleteRecord(userUID) {
   };
   $.ajax(settings);
 }
+
+function saveID(id) {
+  sessionStorage.setItem("selectedRecord", id)
+  window.location.assign('/record.html')
+}
+
+function removeEmpty(array) {
+  for (var i=0; i<array.length; i++) {
+    if (array[i]=='') {
+      array.splice(i, 1);
+    }
+  }
+  return array;
+}
+
+function getData() {
   var settings = {
     url: '/history',
     method: 'GET',
     success: function displayData(data) {
-      console.log(data);
     },
     error: function badData(err) {
-      console.log(err);
     }
   };
   $.ajax(settings).done(function(res) {
@@ -46,7 +43,8 @@ function deleteRecord(userUID) {
     returnedArray.forEach(function(object){
       var objID = object.id
       var dateTime = object.created
-
+      var time = dateTime.slice(11, -5)
+      var date = dateTime.slice(0, 10)
       var tokens = object.text.sentiment.tokens
       tokens = tokens.filter(function(item) {
         return item != ''
@@ -59,10 +57,8 @@ function deleteRecord(userUID) {
         description = 'no description'
       }
       var remLink = `<a onclick="deleteRecord('${objID}')" href="#">delete</a>`;
-      console.log(remLink);
       var viewLink = `<a onclick="saveID('${objID}')" href="#">view</a>`;
-      console.log(viewLink)
-      var htmlLine = `<tr id="${objID}"><td>${dateTime}</td><td>${description}</td><td>${viewLink}</td><td>${remLink}</td></tr>`;
+      var htmlLine = `<tr id="${objID}"><td>${date}</td><td>${time}</td><td>${description}</td><td>${viewLink}</td><td>${remLink}</td></tr>`;
       htmlCode = htmlCode + htmlLine;
     });
     htmlCode = htmlCode + '</table>';
