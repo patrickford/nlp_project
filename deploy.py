@@ -18,5 +18,5 @@ def update_remote():
 def main():
     if update_remote() == True:
         test.main()
-
+        
 main()
