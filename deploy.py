@@ -15,5 +15,8 @@ def update_remote():
     call([push_github], shell=True)
     return True
 
-update_remote()
-test.main()
+def main():
+    if update_remote() == True:
+        test.main()
+
+main()
