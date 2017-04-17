@@ -1,7 +1,13 @@
 import csv, codecs
 import random
+import chardet
 
 randoms = []
+
+rawdata = open("spanish_swadesh.csv", "r").read()
+result = chardet.detect(rawdata)
+charenc = result['encoding']
+print charenc
 
 def get_csv(f):
     new_data = []
@@ -44,28 +50,23 @@ english_words = [item[1] for item in data]
 english_distractors = get_distractors(english_words, 5)
 
 
-for entry in random_dict:
-    question = entry
-    answer = random_dict[entry]
-    english_distractors = get_distractors(english_words, 5)
-    print 'question', question
-    # print 'answer', answer
-    # print 'distractors', english_distractors
-    # print ''
-    all_answers = english_distractors
-    all_answers.append(answer)
-    random.shuffle(all_answers)
-    for answer in all_answers:
-        print answer
-    print ''
+def get_answers():
+    for entry in random_dict:
+        question = entry
+        answer = random_dict[entry]
+        english_distractors = get_distractors(english_words, 5)
+        print 'question', question
+        # print 'answer', answer
+        # print 'distractors', english_distractors
+        # print ''
+        all_answers = english_distractors
+        all_answers.append(answer)
+        random.shuffle(all_answers)
+        for answer in all_answers:
+            print answer
+        print ''
 
 
-#print english_words
-#print english_distractors
-
-
-exit()
-for row in data:
-    spanish_word = row[1]
-    english_word = row[2]
+# for row in data:
+#     print row[0], row[1], row[2]
     #x = codecs.decode(cell, 'utf8')

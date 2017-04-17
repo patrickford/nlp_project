@@ -138,14 +138,7 @@ ul {
 
 form {
   display: block;
-  width: 600px;
-}
-
-#clientData {
-  height: 34px;
-  width: 80px;
-  margin-left: -4px;
-  font-size: larger;
+  width: 400px;
 }
 
 .js-query {
@@ -174,15 +167,23 @@ form {
 
 .intake-field {
   display: block;
-  width: 600px;
+  width: 300px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.intake-label {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.intake-button {
+  height: 100;
+  width: 80px;
 }
 
 #raw {
   width: 60%;
-}
-
-.intake-field {
-  padding: 5px;
 }
 
 .intake-button {
