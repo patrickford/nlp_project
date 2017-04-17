@@ -4,7 +4,7 @@ import chardet
 
 randoms = []
 
-rawdata = open("spanish_swadesh.csv", "r").read()
+rawdata = open("spanish.csv", "r").read()
 result = chardet.detect(rawdata)
 charenc = result['encoding']
 print charenc
@@ -44,7 +44,7 @@ def get_distractors(array, n):
     return array_distractors
 
 
-data = get_csv('spanish_swadesh.csv')
+data = get_csv('spanish.csv')
 random_dict = get_random_words(data, 6)
 english_words = [item[1] for item in data]
 english_distractors = get_distractors(english_words, 5)
@@ -68,5 +68,9 @@ def get_answers():
 
 
 # for row in data:
+#     print row[2]
+
+get_answers()
+
 #     print row[0], row[1], row[2]
     #x = codecs.decode(cell, 'utf8')
