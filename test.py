@@ -86,3 +86,4 @@ def test_server(server):
 def main():
     test_server(local)
     test_server(remote)
+    
