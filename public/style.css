@@ -145,10 +145,10 @@ form {
   }
 
   .app {
-    display: inline-block;
+    display: block;
   }
 
   .formbox {
-    display: inline-block;
+    display: block;
   }
 }

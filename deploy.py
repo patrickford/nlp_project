@@ -7,7 +7,6 @@ def update_remote():
     add = '''git add .'''
     commit_message = raw_input("commit message: ")
     commit_revised = '''git commit -m ''' + commit_message
-    print commit_revised
     push_github = '''git push origin master'''
     push_heroku = '''git push heroku master'''
     call([add], shell=True)
@@ -17,7 +16,5 @@ def update_remote():
     call([push_github], shell=True)
     return True
 
-
-
-update_remote()
-test.main()
+if update_remote() == True:
+    test.main()
