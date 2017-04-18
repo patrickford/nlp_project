@@ -67,7 +67,6 @@ def writeMongo(url):
 
 def deleteMongo(url, _id):
     url = url + 'analysis/'
-    print url
     URL_delete = url + _id
     r = s.delete(URL_delete)
     if r.status_code == 204:
@@ -81,7 +80,6 @@ def test_server(server):
     login(server)
     writeMongo(server)
     random_id = history(server)[-1]['id']
-    print random_id
     deleteMongo(server, random_id)
     update_user(server)
 

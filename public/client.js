@@ -111,38 +111,58 @@ $('#intake').on('submit', function(e){
     $('.output').children().hide();
     var url = $('#link').val();
     var description = $('#description').val();
-    console.log(description)
     postData(url, description);
   })
 
-  function postLogin(_user, _pass) {
-      var settings = {
-        url: 'login',
-        data: {
-          "username": _user,
-          "password": _pass
-        },
-        type: 'POST',
-        error: function badData(err) {
-          console.log(err)
-        }
-      }
-      $.ajax(settings).done(function(res) {
-        var lastName = res.lastName
-        var firstName = res.firstName
-        var fullName = firstName + ' ' + lastName
-        sessionStorage.setItem("authName", fullName);
-        sessionStorage.setItem("email", res.email);
-        sessionStorage.setItem("first", res.firstName);
-        sessionStorage.setItem("last", res.lastName);
-        sessionStorage.setItem("user", res.username);
-        $(location).attr('href', '/nlp.html')
-      });
-    }
+// $('#intake').on('submit', function(e){
+//     e.preventDefault();
+//     $('.output').children().hide();
+//     var url = $('#link').val();
+//     var description = $('#description').val();
+//     postData(url, description);
+//   })
 
-  $("#client-login").on('submit', function(e){
-    e.preventDefault();
-    var user = $("#username").val();
-    var pass = $("#password").val()
-    postLogin(user, pass)
-  })
+function postLogin(_user, _pass) {
+    var settings = {
+      url: 'login',
+      data: {
+        "username": _user,
+        "password": _pass
+      },
+      type: 'POST',
+      error: function badData(err) {
+        console.log(err)
+      }
+    }
+    $.ajax(settings).done(function(res) {
+      var lastName = res.lastName
+      var firstName = res.firstName
+      var fullName = firstName + ' ' + lastName
+      sessionStorage.setItem("authName", fullName);
+      sessionStorage.setItem("email", res.email);
+      sessionStorage.setItem("first", res.firstName);
+      sessionStorage.setItem("last", res.lastName);
+      sessionStorage.setItem("user", res.username);
+      $(location).attr('href', '/nlp.html')
+    });
+  }
+
+$(document).on('submit', "#client-login", function(e){
+  e.preventDefault();
+  var user = $("#username").val();
+  var pass = $("#password").val()
+  postLogin(user, pass)
+})
+
+$('#id').on('click', function(e){
+  e.preventDefault();
+  var user = $("#username").val();
+  var pass = $("#password").val()
+  postLogin(user, pass)
+})
+// $("#sub").on('touchstart mousedown', function(e){
+//   e.preventDefault();
+//   var user = $("#username").val();
+//   var pass = $("#password").val()
+//   postLogin(user, pass)
+// })

@@ -8,19 +8,9 @@ function postNew(_user, _pass, _first, _last, _email) {
         "lastName": _last,
         "email": _email
       },
-      type: 'POST',
-      error: function badData(err) {
-        console.log(url)
-        console.log(err)
-      }
-      // success: function(data) {
-      //   //document.location = "url"
-      // }
+      type: 'POST'
     }
-    $.ajax(settings).done(function(res) {
-      console.log(res)
-      window.location("/")
-    });
+    $.ajax(settings)
   }
 
 $("form").on('submit', function(e) {
@@ -33,5 +23,7 @@ $("form").on('submit', function(e) {
   var email = $("#email").val();
   if (pass1 === pass2) {
     postNew(user, pass1, first, last, email)
+    window.location.href = "/";
+    return false;
   }
-} )
+})

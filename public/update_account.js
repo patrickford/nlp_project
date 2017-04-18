@@ -18,7 +18,7 @@ function putData(_user, _first, _last, _email) {
       console.log(err);
     }
   };
-  $.ajax(settings);
+  $.ajax(settings)
 }
 
 function fillUser() {
@@ -57,4 +57,6 @@ $('form').on('submit', function() {
   var email = $('#email').val();
   var user = sessionStorage.getItem("user");
   putData(user, first, last, email);
+  window.location.href = "/";
+  return false;
 })
