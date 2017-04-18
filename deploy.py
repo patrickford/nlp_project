@@ -6,7 +6,7 @@ import test
 def update_remote():
     add = '''git add .'''
     commit_message = raw_input("commit message: ")
-    commit_revised = '''git commit -m ${0}'''.format(commit_message)
+    commit_revised = '''git commit -m ''' + commit_message
     print commit_revised
     push_github = '''git push origin master'''
     push_heroku = '''git push heroku master'''
