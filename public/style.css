@@ -154,12 +154,10 @@ form {
 
   .app {
     display: block;
-    outline: 1px solid red;
   }
 
   .formbox {
     display: block;
-    outline: 1px solid blue;
   }
 }
 
