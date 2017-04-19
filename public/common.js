@@ -5,6 +5,7 @@ function addUser() {
 };
 
 function logOut() {
+  sessionStorage.clear();
   var settings = {
     url: '/logout',
     method: 'GET',

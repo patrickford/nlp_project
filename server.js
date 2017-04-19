@@ -72,10 +72,9 @@ app.post('/login',
 
 
   app.get('/logout', function(req, res){
-    // console.log(request)
+    req.session.destroy();
     req.logout();
-    // console.log("user logged out")
-    res.redirect('/');
+    // res.redirect('/');
   });
 
 
@@ -254,7 +253,6 @@ app.post('/posts', jsonParser, (req, res) => {
 });
 
 app.delete('/analysis/:id', (req, res) => {
-  //console.log(req)
   analysisData
     .findByIdAndRemove(req.params.id)
     .exec()
@@ -262,7 +260,6 @@ app.delete('/analysis/:id', (req, res) => {
       res.status(204).json({message: 'success'});
     })
     .catch(err => {
-      // console.error(err);
       res.status(500).json({error: 'something went terribly wrong'});
     });
 });

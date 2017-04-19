@@ -29,8 +29,5 @@ describe("nlp_project", function() {
         res.body.should.have.property("username")
         done()
       })
-  });
-
-
-
+  })
 });

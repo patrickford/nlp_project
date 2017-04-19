@@ -145,13 +145,19 @@ function postLogin(_user, _pass) {
     $.ajax(settings).done(function(res) {
       var lastName = res.lastName
       var firstName = res.firstName
-      var fullName = firstName + ' ' + lastName
-      sessionStorage.setItem("authName", fullName);
-      sessionStorage.setItem("email", res.email);
-      sessionStorage.setItem("first", res.firstName);
-      sessionStorage.setItem("last", res.lastName);
-      sessionStorage.setItem("user", res.username);
-      $(location).attr('href', '/nlp.html')
+      console.log(typeof(lastName) === "undefined")
+      if (typeof(lastName) === "undefined") {
+        $(".password-message").html("wrong user name or password").addClass('red')
+      }
+      else {
+        var fullName = firstName + ' ' + lastName;
+        sessionStorage.setItem("authName", fullName);
+        sessionStorage.setItem("email", res.email);
+        sessionStorage.setItem("first", res.firstName);
+        sessionStorage.setItem("last", res.lastName);
+        sessionStorage.setItem("user", res.username);
+        $(location).attr('href', '/nlp.html')
+      }
     });
   }
 
