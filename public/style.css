@@ -146,7 +146,6 @@ form {
     text-align: center;
     justify-content: space-between;
     padding: 40px;
-    outline: 1px solid green;
     flex-direction: column;
   }
 
