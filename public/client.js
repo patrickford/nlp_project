@@ -111,16 +111,24 @@ $('#intake').on('submit', function(e){
     $('.output').children().hide();
     var url = $('#link').val();
     var description = $('#description').val();
-    postData(url, description);
+    if (url != '' && description !='') {
+      console.log('true')
+      postData(url, description);
+    }
+    else if (url == '' && description != '') {
+      $('.intake-label').removeClass("red")
+      $('#link-label').addClass("red");
+    }
+    else if (description == '' && url != '') {
+      $('.intake-label').removeClass("red")
+      $('#description-label').addClass("red");
+    }
+    else {
+      console.log('false')
+      $('.intake-label').addClass("red")
+    }
   })
 
-// $('#intake').on('submit', function(e){
-//     e.preventDefault();
-//     $('.output').children().hide();
-//     var url = $('#link').val();
-//     var description = $('#description').val();
-//     postData(url, description);
-//   })
 
 function postLogin(_user, _pass) {
     var settings = {
@@ -147,22 +155,22 @@ function postLogin(_user, _pass) {
     });
   }
 
-$(document).on('submit', "#client-login", function(e){
+$( "#client-login").on('submit', function(e){
   e.preventDefault();
   var user = $("#username").val();
-  var pass = $("#password").val()
-  postLogin(user, pass)
+  var pass = $("#password").val();
+  if (user != '' && pass != '') {
+    postLogin(user, pass);
+  }
+  else if (user == '' && pass != '') {
+    $('.label').removeClass("red");
+    $('#username-label').addClass("red");
+  }
+  else if (user != '' && pass == '') {
+    $('.label').removeClass("red");
+    $('#password-label').addClass("red");
+  }
+  else {
+    $('.label').addClass("red");
+  }
 })
-
-$('#id').on('click', function(e){
-  e.preventDefault();
-  var user = $("#username").val();
-  var pass = $("#password").val()
-  postLogin(user, pass)
-})
-// $("#sub").on('touchstart mousedown', function(e){
-//   e.preventDefault();
-//   var user = $("#username").val();
-//   var pass = $("#password").val()
-//   postLogin(user, pass)
-// })
