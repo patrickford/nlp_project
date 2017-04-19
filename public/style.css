@@ -141,8 +141,6 @@ form {
   color: #0080ff;
 }
 
-
-
 @media only screen and (max-width: 555px) {
   .outer {
     text-align: center;
