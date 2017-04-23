@@ -1,17 +1,17 @@
 function postNew(_user, _pass, _first, _last, _email) {
-    var settings = {
-      url: '/user',
-      data: {
-        "username": _user,
-        "password": _pass,
-        "firstName": _first,
-        "lastName": _last,
-        "email": _email
-      },
-      type: 'POST'
-    }
-    $.ajax(settings)
+  var settings = {
+    url: '/user',
+    data: {
+      "username": _user,
+      "password": _pass,
+      "firstName": _first,
+      "lastName": _last,
+      "email": _email
+    },
+    type: 'POST'
   }
+  $.ajax(settings)
+}
 
 $("form").on('submit', function(e) {
   e.preventDefault();
@@ -26,4 +26,4 @@ $("form").on('submit', function(e) {
     window.location.href = "/";
     return false;
   }
-})
+});

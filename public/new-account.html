@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Language Analyzer</title>
-</head>
-<body>
-  <div class="top-menu">
-    <div class="left">
-      <ul>
-        <li><a onclick="" href="/nlp.html">Analyze</a></li>
-        <li><a onclick="" href="/records.html">My history</a></li>
-        <li> <a onclick="" href="/account.html">My account</a></li>
-      </ul>
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Language Analyzer</title>
+  </head>
+  <body>
+    <div class="top-menu">
+      <div class="left">
+        <ul>
+          <li><a onclick="" href="/nlp.html">Analyze</a></li>
+          <li><a onclick="" href="/records.html">My history</a></li>
+          <li> <a onclick="" href="/account.html">My account</a></li>
+        </ul>
+      </div>
+      <div class="right">
+        <ul>
+          <!-- <li id="user"></li> -->
+          <li id='login'><a href="/">Log in </a></li>
+        </ul>
+      </div>
     </div>
-    <div class="right">
-      <ul>
-        <!-- <li id="user"></li> -->
-        <li id='login'><a href="/">Log in </a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="outer">
-    <div class='app'>
-      <p class="app-title">
-        Language Analyzer
-      </p>
-      <p class="app-description">
-        Get text analytics for any website.<br>
-        All you need is a URL.
-      </p>
-    </div>
-    <div class="formbox">
-      <div class="innerbox">
-        <form >
+    <div class="outer">
+      <div class='app'>
+        <p class="app-title">
+          Language Analyzer
+        </p>
+        <p class="app-description">
+          Get text analytics for any website.<br>
+          All you need is a URL.
+        </p>
+      </div>
+      <div class="formbox">
+        <div class="innerbox">
+          <form >
+          <!-- ** Example to simplify form inputs **
+            <label for="username">UserName</label>
+            <input class="field" id="username" type="text" name="username" value=""/>
+          -->
             <div class="label">
               Username
             </div>
@@ -77,15 +81,15 @@
             <div class="entry">
               <input class="field" id="password2" type="password" name="password" value=""/>
             </div>
-          <div class='login'>
-            <input class="field"  id="sub" type="submit" value="Create an account"/>
-          </div>
-        </form>
+            <div class='login'>
+              <input class="field"  id="sub" type="submit" value="Create an account"/>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-  <!-- <script src="/client.js"> </script> -->
-  <script src="/new_account.js"> </script>
-</body>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <!-- <script src="/client.js"> </script> -->
+    <script src="/new_account.js"></script>
+  </body>
 </html>

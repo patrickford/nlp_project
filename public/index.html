@@ -1,68 +1,68 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Language Analyzer</title>
-</head>
-<body>
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Language Analyzer</title>
+  </head>
   <body>
-    <div class="top-menu">
-      <div class="left">
-        <ul>
-          <li><a href="/nlp.html">Analysis</a></li>
-          <li><a href="/records.html">History</a></li>
-          <li> <a href="/update-account.html">Account</a></li>
-        </ul>
+    <body>
+      <div class="top-menu">
+        <div class="left">
+          <ul>
+            <li><a href="/nlp.html">Analysis</a></li>
+            <li><a href="/records.html">History</a></li>
+            <li> <a href="/update-account.html">Account</a></li>
+          </ul>
+        </div>
+        <div class="right">
+          <ul>
+            <!-- <li id="user"></li> -->
+            <!-- <li id="login"><a href="/">Log in</a></li> -->
+          </ul>
+        </div>
       </div>
-      <div class="right">
-        <ul>
-          <!-- <li id="user"></li> -->
-          <!-- <li id="login"><a href="/">Log in</a></li> -->
-        </ul>
+    <div class="outer">
+      <div class='app'>
+        <p class="app-title">
+          Language Analyzer
+        </p>
+        <p class="app-description">
+          Get text analytics for any website.<br>
+          All you need is a URL.
+        </p>
+      </div>
+      <div class="formbox">
+        <div class="innerbox">
+          <form id="client-login">
+              <p class='account'>
+                <a href="/new-account.html">Create an account</a>
+              </p>
+              <div class="label" id="username-label">
+                Username
+              </div>
+              <div class="entry">
+                <input class="field" id="username" type="text" name="username" value=""/>
+              </div>
+              <div class="label" id="password-label">
+                Password
+              </div>
+              <div class="entry">
+                <input class="field" id="password" type="password" name="password" value=""/>
+              </div>
+              <div class='login'>
+                <input class="field"  id="sub" type="submit" value="Log in"/>
+              </div>
+              <div class="password-message">
+              </div>
+          </form>
+        </div>
       </div>
     </div>
-  <div class="outer">
-    <div class='app'>
-      <p class="app-title">
-        Language Analyzer
-      </p>
-      <p class="app-description">
-        Get text analytics for any website.<br>
-        All you need is a URL.
-      </p>
-    </div>
-    <div class="formbox">
-      <div class="innerbox">
-        <form id="client-login">
-            <p class='account'>
-              <a href="/new-account.html">Create an account</a>
-            </p>
-            <div class="label" id="username-label">
-              Username
-            </div>
-            <div class="entry">
-              <input class="field" id="username" type="text" name="username" value=""/>
-            </div>
-            <div class="label" id="password-label">
-              Password
-            </div>
-            <div class="entry">
-              <input class="field" id="password" type="password" name="password" value=""/>
-            </div>
-            <div class='login'>
-              <input class="field"  id="sub" type="submit" value="Log in"/>
-            </div>
-            <div class="password-message">
-            </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-  <script src="/client.js"> </script>
-</body>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="/client.js"></script>
+  </body>
 </html>

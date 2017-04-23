@@ -48,7 +48,7 @@ function fillUser() {
     <input class="field"  id="sub" type="submit" value="Update user profile"/>
   </div>
   `;
-    $("form").html(_form);
+  $("form").html(_form);
 };
 
 $('form').on('submit', function() {

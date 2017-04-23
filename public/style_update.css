@@ -33,8 +33,8 @@ ul {
 }
 
 .top-menu .right ul {
-    list-style-type: none;
-    text-align: right;
+  list-style-type: none;
+  text-align: right;
 }
 
 .top-menu .right ul li {
@@ -42,8 +42,8 @@ ul {
 }
 
 .top-menu .left ul {
-    list-style-type: none;
-    text-align: left;
+  list-style-type: none;
+  text-align: left;
 }
 
 .top-menu .left ul li {
@@ -130,10 +130,10 @@ form {
 }
 
 #sub {
-    background-color: #0080ff;
-    border-style: none;
-    border-radius: 5px;
-    color: #ffffff;
+  background-color: #0080ff;
+  border-style: none;
+  border-radius: 5px;
+  color: #ffffff;
 }
 
 .account {
@@ -144,8 +144,6 @@ form {
   text-decoration: none;
   color: #0080ff;
 }
-
-
 
 @media only screen and (max-width: 555px) {
   .outer {

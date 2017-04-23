@@ -55,7 +55,7 @@ function writeRaw(string) {
   $("#raw").html(string);
 }
 
-window.onload =  function() {
+window.onload = function() {
   addUser();
   var _id = sessionStorage.getItem("selectedRecord");
   console.log(_id);

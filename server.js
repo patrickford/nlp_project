@@ -1,26 +1,35 @@
-const bodyParser = require('body-parser');
 const express = require('express');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const sentiment = require('sentiment');
 const natural = require('natural');
 const tokenizer = new natural.WordTokenizer;
+
 const pos = require('pos');
 const tagger = new pos.Tagger();
+
 const {DATABASE_URL, PORT} = require('./config');
 const {analysisData, User} = require('./models');
+const {countNgrams, filterObject, sortArray} = require('./utilities');
+
 const app = express();
 const passport = require('passport');
 const jsonParser = bodyParser.json();
+
 var request = require('request');
 var request = request.defaults({jar: true});
+
 var expressSession = require('express-session');
+app.use(expressSession({ secret: 'keyboard cat' }));
+
 app.use(express.static('./public'));
 app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+
 mongoose.Promise = global.Promise;
-app.use(expressSession({ secret: 'keyboard cat' }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 passport.serializeUser(function(user, done) {
@@ -31,6 +40,7 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   });
 });
+
 var LocalStrategy = require('passport-local').Strategy;
 const localStrategy = new LocalStrategy((username, password, callback) => {
   let user;
@@ -57,58 +67,20 @@ passport.use(localStrategy);
 
 app.post('/login',
   passport.authenticate('local', {
-    //successRedirect: '/nlp.html',
     failureRedirect: '/',
     session: true
   }),
   function(req, res) {
-    // console.log(req);
     var lastName = req.user.lastName;
     var firstName = req.user.firstName
     var fullName = firstName + ' ' + lastName
-    // console.log(fullName)
     res.send(req.user)
   });
 
-
-  app.get('/logout', function(req, res){
-    req.session.destroy();
-    req.logout();
-    // res.redirect('/');
-  });
-
-
-function countNgrams(arr, n) {
-  var reduced = {};
-  for (var i=0; i<arr.length; i++) {
-    var key = arr[i].join('-');
-    if (reduced[key]) {
-      reduced[key][n]++;
-    }
-    else {
-      arr[i][n] = 1;
-      reduced[key] = arr[i];
-    }
-  }
-  return reduced;
-}
-
-function filterObject(obj, n) {
-  freqList = []
-  for (var prop in obj) {
-    var freqCount = obj[prop][n]
-    if (freqCount > 2) {
-      freqList.push(obj[prop]);
-    }
-  }
-  return freqList
-}
-
-function sortArray(arr) {
-  arr.sort(function(a, b) {
-    return a - b;
-  })
-}
+app.get('/logout', function(req, res){
+  req.session.destroy();
+  req.logout();
+});
 
 app.get('/history', (req, res) => {
   if (req.user) {
@@ -126,22 +98,6 @@ app.get('/history', (req, res) => {
       res.status(500).json({error: 'something went terribly wrong'});
     });
 });
-
-app.post('/record', (req, res) => {
-  if (req.user) {
-    console.log("User is already authenticated")
-    console.log(req.user.username)
-  }
-  var id = req.body.id;
-  analysisData.findById(id, function (err, record){
-    // console.log(record)
-    // console.log(record.text)
-    res.status(200).send(record);
-  })
-
-});
-
-
 
 app.post('/user', (req, res) => {
   if (!req.body) {
@@ -198,10 +154,36 @@ app.post('/user', (req, res) => {
     });
 });
 
+app.put('/user', (req, res) => {
+  User
+    .findOneAndUpdate({username:req.body.username}, {$set:
+      {
+        firstName : req.body.first,
+        lastName : req.body.last,
+        email: req.body.email
+      }
+    })
+    .exec()
+    .then(user => res.status(200).json(user))
+    .catch(err => res.status(500).json({message: 'Something went wrong'}));
+});
+
+app.post('/record', (req, res) => {
+  if (req.user) {
+    console.log("User is already authenticated")
+    console.log(req.user.username)
+  }
+  var id = req.body.id;
+  analysisData.findById(id, function (err, record){
+
+    res.status(200).send(record);
+  })
+});
+
 app.post('/posts', jsonParser, (req, res) => {
   responseObject = {};
   if (!req.user) {
-    res.status(400).json({message: "unauthenticed"});
+    res.status(400).json({message: "unauthenticated"});
   }
   else {
     var url = req.body.url;
@@ -219,23 +201,28 @@ app.post('/posts', jsonParser, (req, res) => {
       }
     var target = temp.join("<br><br>");
     responseObject['raw'] = target;
+
     var tokenizer = new natural.WordTokenizer();
     var tokens = tokenizer.tokenize(target);
     var tokensLower = tokens.map(function(item){
       return item.toLowerCase();
     })
+
     var taggedWords = tagger.tag(tokensLower);
     var taggedWordsFreq = countNgrams(taggedWords, 2)
     responseObject['tagged'] = taggedWordsFreq;
+
     var NGrams = natural.NGrams;
     var bigrams = NGrams.ngrams(tokensLower, 2);
     var bigramsFreq = countNgrams(bigrams, 2);
     var bigramsFiltered = filterObject(bigramsFreq, 2);
     responseObject['bigrams'] = bigramsFiltered;
+
     var trigrams = NGrams.ngrams(tokensLower, 3);
     var trigramsFreq = countNgrams(trigrams, 3);
     var trigramsFiltered = filterObject(trigramsFreq, 3);
     responseObject['trigrams'] = trigramsFiltered;
+
     var sentimentAnalysis = sentiment(target);
     responseObject['sentiment'] = sentimentAnalysis;
     analysisData
@@ -264,24 +251,9 @@ app.delete('/analysis/:id', (req, res) => {
     });
 });
 
-app.put('/user', (req, res) => {
-  User
-    .findOneAndUpdate({username:req.body.username}, {$set:
-      {
-        firstName : req.body.first,
-        lastName : req.body.last,
-        email: req.body.email
-      }
-    })
-    .exec()
-    .then(user => res.status(200).json(user))
-    .catch(err => res.status(500).json({message: 'Something went wrong'}));
-});
-
 app.use('*', function(req, res) {
   res.status(404).json({message: 'Not Found'});
 });
-
 
 let server;
 
